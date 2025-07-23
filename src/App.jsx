@@ -98,7 +98,7 @@ const App = () => {
       filtered = filtered.filter(item => item.Descricao.toLowerCase().includes(filters.description.toLowerCase()));
     }
     if (filters.prensa) {
-      filtered = filtered.filter(item => String(item.PRENSA).toLowerCase().includes(filters.prensa.toLowerCase()));
+      filtered = filtered.filter(item => String(item.PRENSA).toLowerCase() === filters.prensa.toLowerCase());
     }
 
     setFilteredData(filtered);
@@ -260,9 +260,14 @@ const App = () => {
                     onChange={(e) => setFilters(prev => ({ ...prev, prensa: e.target.value }))}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
-                    <option value="">Todas as máquinas</option>
-                    {uniquePrensas.map(prensa => (
-                      <option key={prensa} value={prensa}>{prensa}</option>
+                                    <option value="">Todas as máquinas</option>
+                    {uniquePrensas
+                      .filter(prensa => prensa != null && prensa !== "") // Opcional: remove valores vazios
+                      .sort((a, b) => Number(a) - Number(b)) // Opcional: ordena numericamente
+                      .map(prensa => (
+                        <option key={prensa} value={prensa}>
+                          {prensa}
+                        </option>
                     ))}
                   </select>
                 </div>
