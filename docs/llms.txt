@@ -1,0 +1,2 @@
+## Pages
+- [Sistema de Análise de Produção](/): Sistema avançado para análise de dados de produção industrial com filtros inteligentes
